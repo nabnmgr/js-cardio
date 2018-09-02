@@ -1,2 +1,3 @@
 # js-cardio
-JavaScript challenges
+
+JavaScript challenges, interview preps
