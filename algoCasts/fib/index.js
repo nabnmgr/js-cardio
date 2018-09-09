@@ -8,15 +8,29 @@
 // Example:
 //   fib(4) === 3
 
+function memoize(fn) {
+  const cache = {};
+  return function(...args) {
+    if (cache[args]) {
+      return cache[args];
+    }
+
+    const result = fn.apply(this, args);
+    cache[args] = result;
+
+    return result;
+  };
+}
+
 function fib(n) {
   if (n < 2) {
     return n;
   }
-
   return fib(n - 1) + fib(n - 2);
+  // these fib() function are the new memoized fib() function from below.
 }
 
-console.log(fib(4));
+fib = memoize(fib);
 
 module.exports = fib;
 
