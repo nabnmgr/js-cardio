@@ -86,6 +86,34 @@ class LinkedList {
     }
     prev.next = null;
   }
+
+  insertLast(data) {
+    // use getLast and point it's next to the new one
+    const last = this.getLast();
+
+    if (last) {
+      last.next = new Node(data);
+    } else {
+      this.head = new Node(data);
+    }
+  }
+
+  getAt(index) {
+    let counter = 0;
+    let node = this.head;
+    while (node) {
+      if (counter === index) {
+        return node;
+      }
+
+      counter++;
+      node = node.next;
+    }
+
+    // if index is out of bounds
+    // return null will also work if head is empty
+    return null;
+  }
 }
 
 module.exports = { Node, LinkedList };
