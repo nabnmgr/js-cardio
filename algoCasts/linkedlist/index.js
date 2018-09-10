@@ -114,6 +114,48 @@ class LinkedList {
     // return null will also work if head is empty
     return null;
   }
+
+  removeAt(index) {
+    // find previous and point next to the following one
+    // use getAt() but to get the previous one.
+    if (!this.head) {
+      return;
+    }
+
+    // if there is only one node;
+    if (index === 0) {
+      this.head = this.head.next;
+      return;
+    }
+
+    const previous = this.getAt(index - 1);
+
+    // if index is out of bounds
+    if (!previous || !previous.next) {
+      return;
+    }
+    previous.next = previous.next.next;
+  }
+
+  insertAt(data, index) {
+    if (!this.head) {
+      this.head = new Node(data);
+      return;
+    }
+
+    if (index === 0) {
+      this.head = new Node(data, this.head);
+      return;
+    }
+
+    // if index is out of bounds, previous becomes the last
+    const previous = this.getAt(index - 1) || this.getLast();
+    const node = new Node(data, previous.next);
+    previous.next = node;
+  }
 }
+
+const l = new LinkedList();
+l.removeAt(0);
 
 module.exports = { Node, LinkedList };
